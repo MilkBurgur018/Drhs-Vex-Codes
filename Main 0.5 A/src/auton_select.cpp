@@ -30,7 +30,7 @@ void debug_auton_task_fn(void* param) {
         case 3: skills_auton_for_qual(); break;
         case 4: right_qual_auton_center(); break;
         case 5: left_qual_auton_ram(); break;
-        case 6: defensive_mode_auton(); break; // Added these so buttons 6 & 7 work
+        case 6: defensive_mode_auton(); break; // Added these so buttons 6 & 7  SIX SEVEN
         case 7: high_speed_mode_auton(); break;
         default: printf("No auton selected or fallback!\n"); break;
     }
@@ -203,7 +203,7 @@ void create_auton_selector() {
     static lv_coord_t row_dsc[] = {108, 108, LV_GRID_TEMPLATE_LAST};
     
     lv_obj_set_grid_dsc_array(cont, column_dsc, row_dsc);
-    lv_obj_set_layout(cont, LV_LAYOUT_GRID); // Required in LVGL 8
+    lv_obj_set_layout(cont, LV_LAYOUT_GRID); 
 
     lv_obj_set_style_pad_column(cont, 8, 0); 
     lv_obj_set_style_pad_row(cont, 8, 0);

@@ -2,65 +2,88 @@
 #include "globals.hpp"
 
 void left_qual_auton() {
-    // --- 1. SETUP ---
+    // --- SETUP ---
     chassis.pid_targets_reset();
     chassis.drive_imu_reset();
     chassis.drive_sensor_reset();
     chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
     
-    chassis.drive_angle_set(-12);
+    chassis.drive_angle_set(-90);
 
-    // --- 2. MOVEMENT ---
+    // --- MOVEMENT ---
     // Start intake ONLY when moving toward the first ring
     intake_motor.move_velocity(600); 
 
-    chassis.pid_drive_set(24, 110);
+    chassis.pid_drive_set(25, 110);
     chassis.pid_wait(); 
 
-    chassis.pid_drive_set(-18, 110);
+    chassis.pid_turn_set(90, 90);
     chassis.pid_wait();
 
-    chassis.pid_turn_set(-78, 90);
+    chassis.pid_drive_set(25, 110);
+    chassis.pid_wait();
+
+    chassis.pid_drive_set(-25, 110);
+    chassis.pid_wait();
+
+    chassis.pid_turn_set(-90, 90);
     chassis.pid_wait();
 
     chassis.pid_drive_set(36, 110);
     chassis.pid_wait();
 
-    // --- 3. SCORE & STOP INTAKE ---
+    chassis.pid_turn_set(90, 90);
+    chassis.pid_wait();
+
+    chassis.pid_drive_set(36, 110);
+    chassis.pid_wait();
+
     outtake_motor.move_velocity(600); 
     pros::delay(1000);
     outtake_motor.move_velocity(0);
-    
-    // STOP the intake motor immediately after scoring
+
     intake_motor.move_velocity(0);
 
-    // --- 4. GOAL CLAMP ---
+    chassis.pid_drive_set(36, 110);
+    chassis.pid_wait();
+
     chassis.pid_turn_set(180, 90);
     chassis.pid_wait();
 
-    chassis.pid_drive_set(-24, 110); 
+    chassis.pid_drive_set(24, 110); 
     chassis.pid_wait();
     
     pneumA.set_value(true); 
     pros::delay(200);       
 
-    // --- 5. THE SHAKE (Using PROS Native Motor Calls) ---
+    // --- When the robot goes sicko mode ---
     for(int i = 0; i < 3; i++) {
-        // Accessing the PROS MotorGroup objects inside the EZ chassis
+        //using pros native motor calls to shake the robot. bc why the hell not
         left_mg.move_velocity(100);
         right_mg.move_velocity(100);
-        pros::delay(200);             
+        pros::delay(600);             
         
         left_mg.move_velocity(-100);
         right_mg.move_velocity(-100);
-        pros::delay(200);
+        pros::delay(600);
     }   
     // Stop all drivetrain motors
     left_mg.move_velocity(0);
     right_mg.move_velocity(0);
 
-    // --- 6. WRAP UP ---
+    // --- WRAP UP ---
     chassis.pid_drive_set(-24, 110);
     chassis.pid_wait();
+
+    chassis.pid_turn_set(180, 90);
+    chassis.pid_wait();
+
+    chassis.pid_drive_set(36, 110);
+    chassis.pid_wait();
+
+    outtake_motor.move_velocity(600); 
+    pros::delay(1000);
+    outtake_motor.move_velocity(0);
+
     pneumA.set_value(false); 
 }
