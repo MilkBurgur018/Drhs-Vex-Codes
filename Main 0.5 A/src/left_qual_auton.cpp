@@ -32,6 +32,7 @@ void left_qual_auton() {
     chassis.pid_drive_set(36, 110);
     chassis.pid_wait();
 
+    /*
     chassis.pid_turn_set(90, 90);
     chassis.pid_wait();
 
@@ -44,17 +45,23 @@ void left_qual_auton() {
 
     intake_motor.move_velocity(0);
 
-    chassis.pid_drive_set(36, 110);
+    chassis.pid_drive_set(-36, 110);
     chassis.pid_wait();
 
     chassis.pid_turn_set(180, 90);
     chassis.pid_wait();
 
-    chassis.pid_drive_set(24, 110); 
+    chassis.pid_drive_set(24, 110); redundant, no need to double into goal, we have storage
     chassis.pid_wait();
-    
+    */
+    chassis.pid_turn_set(-90, 90);
+    chassis.pid_wait();
+
     pneumA.set_value(true); 
     pros::delay(200);       
+
+    chassis.pid_drive_set(36, 110);
+    chassis.pid_wait();
 
     // --- When the robot goes sicko mode ---
     for(int i = 0; i < 3; i++) {
