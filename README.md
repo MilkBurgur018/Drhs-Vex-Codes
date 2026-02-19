@@ -2,7 +2,5 @@
 
 # PLZ PULL FIRST BEFORE CODING!!!!!!
 
-Most projects on here (or the only project currently) are on pros with lvgl and ez-template
-Liam add your code.
-test test 6767
-gklsdjfipkghjk;'
+Main Code, For Team A.
+Updates a approaching your location at a rapid pace.
