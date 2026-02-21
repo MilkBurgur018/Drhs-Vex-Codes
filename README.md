@@ -2,5 +2,4 @@
 
 # PLZ PULL FIRST BEFORE CODING!!!!!!
 
-Main Code, For Team A.
-Updates, a approaching your location at a rapid pace.
+Old code just bc, this is all i found in my freaking folder and google drive.
