@@ -14,5 +14,6 @@ extern pros::MotorGroup right_mg;
 
 extern pros::adi::DigitalOut pneumA;
 extern pros::adi::DigitalOut pneumB;
+extern pros::adi::DigitalOut pneumH;
 
 #endif

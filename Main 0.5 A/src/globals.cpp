@@ -6,6 +6,7 @@ pros::Motor intake_motor(7);
 pros::Motor outtake_motor(-8);
 pros::adi::DigitalOut pneumA('A');
 pros::adi::DigitalOut pneumB('B');
+pros::adi::DigitalOut pneumH('H');
 //define motors again in pros for auton and more control
 pros::MotorGroup left_mg({1, -2, -3});
 pros::MotorGroup right_mg({4, 5, 6});

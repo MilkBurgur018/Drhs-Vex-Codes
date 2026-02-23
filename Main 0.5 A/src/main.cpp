@@ -38,6 +38,7 @@ void opcontrol() {
     bool outtake_active = false;
     bool piston_stateA = false; 
     bool piston_stateB = false;
+    bool piston_stateH = false;
 
     // Set drive to coast for driving
     chassis.drive_brake_set(MOTOR_BRAKE_COAST);
@@ -62,6 +63,10 @@ void opcontrol() {
         if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R2)) {
             piston_stateB = !piston_stateB; 
             pneumB.set_value(piston_stateB); 
+        }
+        if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+            piston_stateH = !piston_stateH;
+            pneumH.set_value(piston_stateH);
         }
 
         // --- MOTOR LOGIC ---
