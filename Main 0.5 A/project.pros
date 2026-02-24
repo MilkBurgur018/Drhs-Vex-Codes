@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "Main 0.4",
+    "project_name": "Main 0.5 A",
     "target": "v5",
     "templates": {
       "EZ-Template": {
@@ -425,7 +425,7 @@
     },
     "upload_options": {
       "description": "Now when intake, outake is reverse",
-      "icon": "X",
+      "icon": "planet",
       "slot": 2
     },
     "use_early_access": false

@@ -13,26 +13,7 @@ pros::MotorGroup right_mg({4, 5, 6});
 
 // --- CHASSIS DEFINITIONS ---
 
-// CONFIG 1: COMP BOT (CURRENT) - Green Motors (200), 36:60 Gearing (120 RPM Output)
-/*
-ez::Drive chassis (
-  // Left Motors (ports -1, -2, -3)
-  {-1, -2, -3},
-  // Right Motors (ports 4, 5, 6)
-  {4, 5, 6},
-  // IMU Port
-  10,
-  // Wheel Diameter (3.25" usually for 120rpm setups, change if needed)
-  3.25,
-  // Cartridge RPM (Green = 200)
-  200,
-  // External Gear Ratio (36 tooth driving 60 tooth = 0.6 reduction)
-  (36.0 / 60.0) 
-);
-*/
-
-
-// CONFIG 2: COMP BOT (FUTURE) - Blue Motors (600), 36:60 Gearing
+// CONFIG 1: COMP BOT - Blue Motors (600), 36:60 Gearing
 
 ez::Drive chassis (
   {-1, -2, -3},
@@ -40,12 +21,12 @@ ez::Drive chassis (
   20,// IMU Port
   3.25,
   600, // Blue Cartridge
-  (24.0 / 60.0) // Keeps the same physical gears
+  (36.0 / 60.0) // Keeps the same physical gears
 );
 
 
 
-// CONFIG 3: TEST BOT - Old Ports
+// CONFIG 2: TEST BOT - Old Ports
 /*
 ez::Drive chassis (
   // Left: -1, -4, -11
