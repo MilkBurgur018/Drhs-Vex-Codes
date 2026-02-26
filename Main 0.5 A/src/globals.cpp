@@ -7,10 +7,6 @@ pros::Motor outtake_motor(-8);
 pros::adi::DigitalOut pneumA('A');
 pros::adi::DigitalOut pneumB('B');
 pros::adi::DigitalOut pneumH('H');
-//define motors again in pros for auton and more control
-pros::MotorGroup left_mg({1, -2, -3});
-pros::MotorGroup right_mg({4, 5, 6});
-
 // --- CHASSIS DEFINITIONS ---
 
 // CONFIG 1: COMP BOT - Blue Motors (600), 36:60 Gearing
@@ -43,3 +39,7 @@ ez::Drive chassis (
   1.0
 );
 */
+
+//define motors again in pros for auton and more control
+pros::MotorGroup left_mg({1, -2, -3});
+pros::MotorGroup right_mg({4, 5, 6});

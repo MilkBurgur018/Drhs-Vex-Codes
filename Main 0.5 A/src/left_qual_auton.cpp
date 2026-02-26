@@ -14,22 +14,22 @@ void left_qual_auton() {
     // Start intake ONLY when moving toward the first ring
     intake_motor.move_velocity(600); 
 
-    chassis.pid_drive_set(19, 67);
+    chassis.pid_drive_set(50, 67);
     chassis.pid_wait(); 
 
-    chassis.pid_turn_set(90, 90);
+    chassis.pid_turn_set(0, 90);
     chassis.pid_wait();
 
-    chassis.pid_drive_set(30, 67);
+    chassis.pid_drive_set(100, 67);
     chassis.pid_wait();
 
-    chassis.pid_drive_set(-30, 67);
+    chassis.pid_drive_set(-100, 67);
     chassis.pid_wait();
 
     chassis.pid_turn_set(-90, 90);
     chassis.pid_wait();
 
-    chassis.pid_drive_set(32, 67);
+    chassis.pid_drive_set(55, 67);
     chassis.pid_wait();
 
     /*
@@ -54,13 +54,13 @@ void left_qual_auton() {
     chassis.pid_drive_set(24, 67); redundant, no need to double into goal, we have storage
     chassis.pid_wait();
     */
-    chassis.pid_turn_set(-90, 90);
+    chassis.pid_turn_set(180, 90);
     chassis.pid_wait();
 
     pneumA.set_value(true); 
     pros::delay(200);       
 
-    chassis.pid_drive_set(6, 67);
+    chassis.pid_drive_set(50, 67);
     chassis.pid_wait();
 
     // --- When the robot goes sicko mode ---
@@ -79,13 +79,7 @@ void left_qual_auton() {
     right_mg.move_velocity(0);
 
     // --- WRAP UP ---
-    chassis.pid_drive_set(-12, 67);
-    chassis.pid_wait();
-
-    chassis.pid_turn_set(180, 90);
-    chassis.pid_wait();
-
-    chassis.pid_drive_set(36, 67);
+    chassis.pid_drive_set(100, 67);
     chassis.pid_wait();
 
     outtake_motor.move_velocity(600); 
