@@ -7,6 +7,7 @@ void left_qual_auton() {
     chassis.drive_imu_reset();
     chassis.drive_sensor_reset();
     chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
+    pros::delay(20);
     
     chassis.drive_angle_set(-90);
 
@@ -59,10 +60,11 @@ void left_qual_auton() {
     chassis.pid_wait();
 
     pneumA.set_value(true); 
-    pros::delay(200);       
-
-    chassis.pid_drive_set(37, 67);
-    chassis.pid_wait();
+    pros::delay(500);       
+    //ram it in
+    chassis.drive_set(100, 100);
+    pros::delay(1000);
+    chassis.drive_set(0, 0);
 
     //pre sicko
     chassis.pid_turn_set(-181, 90);
@@ -70,13 +72,13 @@ void left_qual_auton() {
     chassis.drive_brake_set(MOTOR_BRAKE_COAST);
     pros::delay(20);
     // --- When the robot goes sicko mode ---
-    for(int i = 0; i < 3; i++) {
+    for(int i = 0; i < 9; i++) {
         //using pros native motor calls to shake the robot. bc why the hell not
-        chassis.pid_turn_set(-180, 90);
-        pros::delay(300);             
+        chassis.drive_set(12000, 12000);
+        pros::delay(50);             
         
-        chassis.pid_turn_set(-181, 90);
-        pros::delay(300);
+        chassis.drive_set(-12000, -12000); // Full reverse on left, full forward on right
+        pros::delay(50);            
     }   
     chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
     // Stop all drivetrain motors
@@ -84,7 +86,7 @@ void left_qual_auton() {
     right_mg.move_velocity(0);
 
     // --- WRAP UP ---
-    chassis.pid_drive_set(-100, 67);
+    chassis.pid_drive_set(-80, 67);
     chassis.pid_wait();
 
     outtake_motor.move_velocity(-600); 
