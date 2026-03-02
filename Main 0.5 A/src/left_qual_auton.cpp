@@ -28,7 +28,7 @@ void left_qual_auton() {
     chassis.pid_drive_set(-100, 43);
     chassis.pid_wait();
 
-    chassis.pid_turn_set(-90, 90);
+    chassis.pid_turn_set(-91, 90);
     chassis.pid_wait();
 
     chassis.pid_drive_set(71, 67);
@@ -62,7 +62,7 @@ void left_qual_auton() {
     pneumA.set_value(true); 
     pros::delay(500);       
     //ram it in
-    chassis.drive_set(100, 100);
+    chassis.drive_set(80, 80);
     pros::delay(1000);
     chassis.drive_set(0, 0);
 
