@@ -31,7 +31,7 @@ void right_qual_auton() {
     chassis.pid_turn_set(89, 90);
     chassis.pid_wait();
 
-    chassis.pid_drive_set(71, 77);
+    chassis.pid_drive_set(71, 70);
     chassis.pid_wait();
 
     chassis.pid_turn_set(180, 90);
@@ -42,7 +42,7 @@ void right_qual_auton() {
 
     //ram it in
     chassis.drive_set(80, 80);
-    pros::delay(900);
+    pros::delay(800);
     chassis.drive_set(0, 0);
 
     //pre sicko
@@ -54,10 +54,10 @@ void right_qual_auton() {
     for(int i = 0; i < 13; i++) {
         //using direct voltage calls to shake the robot. bc why the hell not
         chassis.drive_set(12000, 12000);
-        pros::delay(50);             
+        pros::delay(60);             
         
         chassis.drive_set(-12000, -12000); 
-        pros::delay(50);            
+        pros::delay(60);            
     }   
     chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
     // Stop all drivetrain motors
@@ -65,7 +65,7 @@ void right_qual_auton() {
     right_mg.move_velocity(0);
 
     // wrap it up
-    chassis.pid_drive_set(-80, 77);
+    chassis.pid_drive_set(-80, 70);
     chassis.pid_wait();
 
     outtake_motor.move_velocity(-12000); 
@@ -80,6 +80,6 @@ void right_qual_auton() {
     chassis.drive_set(0, 0);
 
     chassis.drive_set(-12000, -12000);
-    pros::delay(900);
+    pros::delay(700);
     chassis.drive_set(0, 0);
 }
