@@ -1,9 +1,9 @@
 #include "main.h"
 #include "liblvgl/lvgl.h"
 #include "auton_select.hpp"
-#include "autons.hpp" // <--- CRITICAL: This fixes "undefined identifier" errors
+#include "autons.hpp"
 
-// --- GLOBALS ---
+//globs
 int selected_auton = 1; 
 bool is_debug_running = false;
 lv_obj_t * debug_label_ptr = NULL;
@@ -11,7 +11,7 @@ lv_obj_t * debug_label_ptr = NULL;
 // store pointers to buttons so the controller can access them
 lv_obj_t * btn_objs[8]; 
 
-// --- STYLES ---
+//set styles
 static lv_style_t style_btn_default;
 static lv_style_t style_btn_checked;
 static lv_style_t style_btn_focused; // Controller Hover
@@ -20,9 +20,8 @@ static lv_style_t style_debug_default;
 static lv_style_t style_debug_checked;
 static lv_style_t style_debug_focused; // Controller Hover
 
-// --- LOGIC: DEBUG TASK ---
+//Forec Run Logic
 void debug_auton_task_fn(void* param) {
-    printf("Debug run started!\n");
     // Switch calls the functions defined in autons.hpp
     switch (selected_auton) {
         case 1: left_qual_auton();   break;
@@ -30,19 +29,18 @@ void debug_auton_task_fn(void* param) {
         case 3: skills_auton_for_qual(); break;
         case 4: right_qual_auton_center(); break;
         case 5: left_qual_auton_ram(); break;
-        case 6: defensive_mode_auton(); break; // Added these so buttons 6 & 7  SIX SEVEN
-        case 7: high_speed_mode_auton(); break;
+        case 6: d_c_ctrl(); break; // Added these so buttons 6 & 7  SIX SEVEN
+        case 7: flip_auton(); break;
         default: printf("No auton selected or fallback!\n"); break;
     }
 
-    printf("Debug run finished!\n");
     if (debug_label_ptr != NULL) {
         lv_label_set_text(debug_label_ptr, "debug test run");
     }
     is_debug_running = false;
 }
 
-// --- LOGIC: SELECTION CORE ---
+//Select Logic (called by both touchscreen and controller)
 void execute_auton_selection(int btn_index) {
     if (btn_index < 7) {
         selected_auton = btn_index + 1;
@@ -74,13 +72,13 @@ void execute_auton_selection(int btn_index) {
     }
 }
 
-// --- CALLBACK: TOUCHSCREEN ---
+//touch the screen
 static void auton_click_cb(lv_event_t * e) {
     int btn_index = (int)(uintptr_t)lv_event_get_user_data(e);
     execute_auton_selection(btn_index);
 }
 
-// --- TASK: CONTROLLER WATCHER ---
+//supervise ctrl
 void controller_watcher_task(void* param) {
     pros::Controller master(pros::E_CONTROLLER_MASTER);
     int cursor_index = 0;
@@ -208,7 +206,7 @@ void create_auton_selector() {
     lv_obj_set_style_pad_column(cont, 8, 0); 
     lv_obj_set_style_pad_row(cont, 8, 0);
 
-    // --- Buttons ---
+    //buttons
     for(int i = 0; i < 8; i++) {
         lv_obj_t * btn = lv_btn_create(cont);
         
@@ -241,16 +239,16 @@ void create_auton_selector() {
         lv_obj_center(label); 
 
         if (i == 7) debug_label_ptr = label; 
-
+        // label text
         switch (i) {
             case 0: lv_label_set_text(label, "Left Qual Auton"); break;
             case 1: lv_label_set_text(label, "Right Qual Auton"); break;
-            case 2: lv_label_set_text(label, "Skills Auton Qual"); break;
-            case 3: lv_label_set_text(label, "Right Qual Center"); break;
-            case 4: lv_label_set_text(label, "Left Qual Ram"); break;
-            case 5: lv_label_set_text(label, "Defensive Mode"); break;
-            case 6: lv_label_set_text(label, "High Speed Mode"); break;
-            case 7: lv_label_set_text(label, "debug test run"); break;
+            case 2: lv_label_set_text(label, "WIP Skills Auton"); break;
+            case 3: lv_label_set_text(label, "WIP Right Qual Center"); break;
+            case 4: lv_label_set_text(label, "WIP Left Qual Ram"); break;
+            case 5: lv_label_set_text(label, "PLCHLD Disconnect Opposing Ctrl"); break;
+            case 6: lv_label_set_text(label, "PLCHLD do a flip"); break;
+            case 7: lv_label_set_text(label, "FORCE RUN"); break;
         }
     }
 

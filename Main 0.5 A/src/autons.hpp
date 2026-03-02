@@ -12,7 +12,7 @@ void left_qual_auton_ram();
 
 // Placeholders for the other buttons (Defensive/High Speed)
 // If you don't have code for these yet, you can create empty functions later
-void defensive_mode_auton();
-void high_speed_mode_auton();
+void d_c_ctrl();
+void flip_auton();
 
 #endif

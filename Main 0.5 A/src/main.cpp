@@ -24,9 +24,8 @@ void autonomous() {
         case 3: skills_auton_for_qual(); break;
         case 4: right_qual_auton_center(); break;
         case 5: left_qual_auton_ram(); break;
-        case 6: defensive_mode_auton(); break; 
-        case 7: high_speed_mode_auton(); break;
-        default: printf("No auton selected!\n"); break;
+        case 6: d_c_ctrl(); break; 
+        case 7: flip_auton(); break;
     }
 }
 
@@ -39,13 +38,10 @@ void opcontrol() {
     bool piston_stateA = false; 
     bool piston_stateB = false;
     bool piston_stateH = false;
-
-    // Set drive to coast for driving
-    chassis.drive_brake_set(MOTOR_BRAKE_COAST);
+    bool l2_pressed = false;
 
     while (true) {
         if (is_debug_running) { pros::delay(20); continue; }
-
         // --- DRIVE ---
         chassis.opcontrol_arcade_standard(ez::SPLIT);
         
@@ -64,16 +60,18 @@ void opcontrol() {
             piston_stateB = !piston_stateB; 
             pneumB.set_value(piston_stateB); 
         }
-        if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+        if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN) && !l2_pressed) {
             piston_stateH = !piston_stateH;
             pneumH.set_value(piston_stateH);
+        } else {
+            // let auton selector do its own thing with the down button, don't let it interfere with opcontrol
         }
 
         // --- MOTOR LOGIC ---
         int intake_voltage = 0;
         int outtake_voltage = 0;
-        bool l2_pressed = master.get_digital(pros::E_CONTROLLER_DIGITAL_L2);
-
+        l2_pressed = master.get_digital(pros::E_CONTROLLER_DIGITAL_L2);
+        
         // 1. INTAKE LOGIC
         if (intake_active) {
             if (l2_pressed) {

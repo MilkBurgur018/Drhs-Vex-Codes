@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "Main 0.5 A",
+    "project_name": "Main 0.8 A",
     "target": "v5",
     "templates": {
       "EZ-Template": {
@@ -424,9 +424,9 @@
       }
     },
     "upload_options": {
-      "description": "Now when intake, outake is reverse",
-      "icon": "planet",
-      "slot": 2
+      "description": "Autons added, not skills though.",
+      "icon": "pizza",
+      "slot": 1
     },
     "use_early_access": false
   }
