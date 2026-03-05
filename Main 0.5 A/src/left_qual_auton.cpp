@@ -15,31 +15,31 @@ void left_qual_auton() {
     intake_motor.move_velocity(600); 
     outtake_motor.move_velocity(500);
 
-    chassis.pid_drive_set(44, 95);
+    chassis.pid_drive_set(44, 84);
     chassis.pid_wait(); 
 
-    chassis.pid_turn_set(0, 95);
+    chassis.pid_turn_set(0, 84);
     chassis.pid_wait();
 
-    chassis.pid_drive_set(100, 95);
+    chassis.pid_drive_set(100, 70);
     chassis.pid_wait();
 
-    chassis.pid_drive_set(-100, 95);
+    chassis.pid_drive_set(-100, 70);
     chassis.pid_wait();
 
-    chassis.pid_turn_set(-91, 95);
+    chassis.pid_turn_set(-91, 84);
     chassis.pid_wait();
 
-    chassis.pid_drive_set(72,95);
+    chassis.pid_drive_set(71, 84);
     chassis.pid_wait();
 
-    chassis.pid_turn_set(-179, 95);
+    chassis.pid_turn_set(-179, 84);
     chassis.pid_wait();
 
     pneumA.set_value(true); 
     pros::delay(50);       
     //ram it in
-    chassis.drive_set(65, 65);
+    chassis.drive_set(60, 60);
     pros::delay(995);
     chassis.drive_set(0, 0);
 
@@ -64,19 +64,20 @@ void left_qual_auton() {
     chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
 
     //wrap it up
-    chassis.pid_turn_set(-181, 127);
+    chassis.pid_turn_set(-180, 127);
     chassis.pid_wait();
 
-    chassis.pid_drive_set(-80,127);
-    chassis.pid_wait_until(-73);
+    chassis.pid_drive_set(-84,90);
+    chassis.pid_wait_until(-74);
 
-    outtake_motor.move_velocity(-12000); 
-    pros::delay(2600);
+    outtake_motor.move_velocity(-12000);
+    pros::delay(26000);
     outtake_motor.move_velocity(0);
 
     //Ram
+    /*
     chassis.drive_set(40, 40);
-    pros::delay(950); 
+    pros::delay 840); 
     chassis.drive_set(0, 0);
 
     chassis.drive_set(-12000, -12000);
@@ -84,4 +85,5 @@ void left_qual_auton() {
     chassis.drive_set(0, 0);
 
     pneumA.set_value(false); 
+    */
 }

@@ -85,33 +85,19 @@ void opcontrol() {
 
         // 2. OUTTAKE LOGIC
         if (intake_active && !outtake_active && !piston_stateB) {
-            // SCENARIO 1: Intake is ON, but Outtake Toggle is OFF.
             outtake_voltage = -12000; 
         } 
         else if (outtake_active && !piston_stateB && intake_active) {
-            // SCENARIO 2: Outtake Toggle is ON.
-            // It follows L2 (Reverse if pressed, Forward if not).
-            if (l2_pressed && !piston_stateB) {
-                outtake_voltage = -12000;
-            } else {
-                outtake_voltage = 12000;
-            }
+            outtake_voltage = 12000;
         } 
         else if (intake_active && piston_stateB && !outtake_active) {
-            // SCENARIO 3: piston down but outtake not on, keep blocks in on botton outwheel.
             outtake_voltage = 12000;
         }
         else if (outtake_active && piston_stateB && intake_active) {
-            // SCENARIO 4: piston down and outtake on, reverse outwheel to output.
-            //l2 reverse
-            if (l2_pressed && piston_stateB) {
-                outtake_voltage = -12000;
-            } else {
-                outtake_voltage = 300; // Slower forward to prevent throwing blocks too far when piston is down
-            }
+            outtake_voltage = -300;
         }
         else {
-            // SCENARIO 5: Outtake Toggle is OFF, and either Intake is OFF or piston is down.
+            
             outtake_voltage = 0;
         }
 

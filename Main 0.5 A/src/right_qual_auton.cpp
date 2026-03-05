@@ -16,32 +16,32 @@ void right_qual_auton() {
     intake_motor.move_velocity(600); 
     outtake_motor.move_velocity(500);
 
-    chassis.pid_drive_set(42, 95);
+    chassis.pid_drive_set(42, 84);
     chassis.pid_wait(); 
 
-    chassis.pid_turn_set(0, 95);
+    chassis.pid_turn_set(0, 84);
     chassis.pid_wait();
 
-    chassis.pid_drive_set(110, 95);
+    chassis.pid_drive_set(113, 70);
     chassis.pid_wait();
 
-    chassis.pid_drive_set(-110, 95);
+    chassis.pid_drive_set(-113, 70);
     chassis.pid_wait();
 
-    chassis.pid_turn_set(89, 95);
+    chassis.pid_turn_set(90, 84);
     chassis.pid_wait();
 
-    chassis.pid_drive_set(71, 95);
+    chassis.pid_drive_set(74, 84);
     chassis.pid_wait();
 
-    chassis.pid_turn_set(181, 95);
+    chassis.pid_turn_set(179, 84);
     chassis.pid_wait();
 
     pneumA.set_value(true); 
     pros::delay(50);       
 
     //ram it in
-    chassis.drive_set(65, 65);
+    chassis.drive_set(60, 60);
     pros::delay(995);
     chassis.drive_set(0, 0);
 
@@ -61,28 +61,25 @@ void right_qual_auton() {
         pros::delay(110);         
     }   
     chassis.drive_set(12000, 12000);
-    pros::delay(600);      
+    pros::delay(650);      
     chassis.drive_set(0,0);
 
     chassis.drive_brake_set(MOTOR_BRAKE_HOLD);
-    // Stop all drivetrain motors
-    left_mg.move_velocity(0);
-    right_mg.move_velocity(0);
-
     // wrap it up
-    chassis.pid_turn_set(180, 127);
+    chassis.pid_turn_set(181, 127);
     chassis.pid_wait();
 
-    chassis.pid_drive_set(-75, 127);
-    chassis.pid_wait_until(-70);
+    chassis.pid_drive_set(-84, 90);
+    chassis.pid_wait_until(-74);
 
     outtake_motor.move_velocity(-12000); 
-    pros::delay(2600);
+    pros::delay(26000);
     outtake_motor.move_velocity(0);
 
     //Ram
-    chassis.drive_set(40, 40);
-    pros::delay(950); 
+    /*
+    chassis.drive_set(60, 60);
+    pros::delay(750); 
     chassis.drive_set(0, 0);
 
     chassis.drive_set(-12000, -12000);
@@ -90,4 +87,5 @@ void right_qual_auton() {
     chassis.drive_set(0, 0);
 
     pneumA.set_value(false); 
+    */
 }
