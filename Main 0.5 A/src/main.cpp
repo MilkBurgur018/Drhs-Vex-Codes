@@ -40,7 +40,44 @@ void opcontrol() {
     bool piston_stateH = false;
     bool l2_pressed = false;
 
+    //controller print rate adjust because pros is wack.
+    //imput storage system sim.
+    std::string last_printed = "";
+    uint32_t last_print_time = 0;
+    bool pending_print = false;
+    std::string pending_text = "";
+    int pending_row = 0;
+    int pending_col = 0;
+
+    auto schedule_print = [&](int row, int col, const std::string &msg) {
+        uint32_t now = pros::millis();
+        if (msg != last_printed && (now - last_print_time) >= 50) {
+            master.clear_line(row);
+            master.print(row, col, "%s", msg.c_str());
+            last_printed = msg;
+            last_print_time = pros::millis();
+            pending_print = false;
+        } else if (msg != last_printed) {
+            pending_print = true;
+            pending_text = msg;
+            pending_row = row;
+            pending_col = col;
+        }
+    };
+
     while (true) {
+        //print send (flushes pending print if it's time, otherwise waits to print until 50ms have passed since last print to avoid flooding the controller) bro why is vs autocomplete goated
+        if (pending_print) {
+            uint32_t now = pros::millis();
+            if ((now - last_print_time) >= 50) {
+                master.clear_line(pending_row);
+                master.print(pending_row, pending_col, "%s", pending_text.c_str());
+                last_printed = pending_text;
+                last_print_time = pros::millis();
+                pending_print = false;
+            }
+        }
+
         if (is_debug_running) { pros::delay(20); continue; }
         // --- DRIVE ---
         chassis.opcontrol_arcade_standard(ez::SPLIT);
@@ -72,7 +109,7 @@ void opcontrol() {
         int outtake_voltage = 0;
         l2_pressed = master.get_digital(pros::E_CONTROLLER_DIGITAL_L2);
         
-        // 1. INTAKE LOGIC
+        //INTAKE LOGIC
         if (intake_active) {
             if (l2_pressed) {
                 intake_voltage = -12000; // Reverse
@@ -83,22 +120,31 @@ void opcontrol() {
             intake_voltage = 0;
         }
 
-        // 2. OUTTAKE LOGIC
+        //OUTTAKE LOGIC
         if (intake_active && !outtake_active && !piston_stateB) {
+            //1. backspin outtake to store
             outtake_voltage = -12000; 
+            schedule_print(0,0,"I/");
         } 
         else if (outtake_active && !piston_stateB && intake_active) {
+            //2. only allow outtake while intaking.
             outtake_voltage = 12000;
+            schedule_print(0,0,"I/OUTTAKE");
         } 
         else if (intake_active && piston_stateB && !outtake_active) {
+            //3. intake with piston, outtake foward to store
             outtake_voltage = 12000;
+            schedule_print(0,0,"I/PISTON");
         }
         else if (outtake_active && piston_stateB && intake_active) {
+            //4. all on, outtake reverse to score
             outtake_voltage = -300;
+            schedule_print(0,0,"I/OUTTAKE PISTON");
         }
         else {
-            
+            //5. outtake or piston on without intake = no outtake.
             outtake_voltage = 0;
+            schedule_print(0,0,"IDLE");
         }
 
         // 3. APPLY VOLTAGES
