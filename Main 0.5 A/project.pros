@@ -426,7 +426,11 @@
     "upload_options": {
       "description": "Autons added, not skills though.",
       "icon": "pizza",
+<<<<<<< Updated upstream
       "slot": 1
+=======
+      "slot": 3
+>>>>>>> Stashed changes
     },
     "use_early_access": false
   }
