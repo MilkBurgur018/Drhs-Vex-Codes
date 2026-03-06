@@ -133,12 +133,12 @@ void opcontrol() {
         } 
         else if (intake_active && piston_stateB && !outtake_active) {
             //3. intake with piston, outtake foward to store
-            outtake_voltage = 12000;
+            outtake_voltage = -12000;
             schedule_print(0,0,"I/PISTON");
         }
         else if (outtake_active && piston_stateB && intake_active) {
             //4. all on, outtake reverse to score
-            outtake_voltage = -300;
+            outtake_voltage = 300;
             schedule_print(0,0,"I/OUTTAKE PISTON");
         }
         else {
