@@ -1,5 +1,6 @@
 #include "main.h"
 #include "globals.hpp"
+#include "autons.hpp"
 
 void left_qual_auton() {
     //auton init
@@ -15,7 +16,7 @@ void left_qual_auton() {
     intake_motor.move_velocity(600); 
     outtake_motor.move_velocity(500);
 
-    chassis.pid_drive_set(44, 84);
+    chassis.pid_drive_set(50.35, 84);
     chassis.pid_wait(); 
 
     chassis.pid_turn_set(0, 84);
