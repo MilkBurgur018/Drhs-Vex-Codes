@@ -244,8 +244,8 @@ void create_auton_selector() {
             case 0: lv_label_set_text(label, "Left Qual Auton"); break;
             case 1: lv_label_set_text(label, "Right Qual Auton"); break;
             case 2: lv_label_set_text(label, "WIP Skills Auton"); break;
-            case 3: lv_label_set_text(label, "WIP Right Qual Center"); break;
-            case 4: lv_label_set_text(label, "WIP Left Qual Ram"); break;
+            case 3: lv_label_set_text(label, "Right Qual Short"); break;
+            case 4: lv_label_set_text(label, "Left Qual Short"); break;
             case 5: lv_label_set_text(label, "PLCHLD Disconnect Opposing Ctrl"); break;
             case 6: lv_label_set_text(label, "PLCHLD do a flip"); break;
             case 7: lv_label_set_text(label, "FORCE RUN"); break;

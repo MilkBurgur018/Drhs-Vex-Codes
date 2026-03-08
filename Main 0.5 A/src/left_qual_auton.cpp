@@ -16,16 +16,16 @@ void left_qual_auton() {
     intake_motor.move_velocity(600); 
     outtake_motor.move_velocity(500);
 
-    chassis.pid_drive_set(42.65, 84);
+    chassis.pid_drive_set(44, 84);
     chassis.pid_wait(); 
 
     chassis.pid_turn_set(0, 84);
     chassis.pid_wait();
 
-    chassis.pid_drive_set(100, 70);
+    chassis.pid_drive_set(112, 64);
     chassis.pid_wait();
 
-    chassis.pid_drive_set(-100, 70);
+    chassis.pid_drive_set(-112, 64);
     chassis.pid_wait();
 
     chassis.pid_turn_set(-91, 84);
@@ -72,8 +72,11 @@ void left_qual_auton() {
     chassis.pid_wait_until(-74);
 
     outtake_motor.move_velocity(-12000);
-    pros::delay(26000);
-    outtake_motor.move_velocity(0);
+    intake_motor.move_velocity(-12000);
+    pros::delay(200);
+    intake_motor.move_velocity(12000);
+    pros::delay(25800);
+    
 
     //Ram
     /*
