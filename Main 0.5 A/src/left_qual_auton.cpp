@@ -14,12 +14,12 @@ void left_qual_auton() {
 
     //MOVEMENT
     intake_motor.move_velocity(600); 
-    outtake_motor.move_velocity(500);
+    outtake_motor.move_velocity(6767);
 
     chassis.pid_drive_set(44, 84);
     chassis.pid_wait(); 
 
-    chassis.pid_turn_set(0, 84);
+    chassis.pid_turn_set(0, 83);
     chassis.pid_wait();
 
     chassis.pid_drive_set(112, 64);
